@@ -90,10 +90,15 @@ def expandir(cadena):
                     #agrega a nuestra lista un str cambiado
                     nueva.append(str("("+listToStr(nueva2[::-1])+").("+listToStr(nueva2[::-1])+"*)"))
                 nueva2 = []
- 
+    
+    for i in range(len(nueva)):
+        if nueva[i] == ".":
+            nueva.pop(i)
     return listToStr(nueva)
 
-expandir("a+.((a|b)?)+")
+
+x = expandir("ab+")
+print(x)
 
 
 
@@ -101,7 +106,7 @@ expandir("a+.((a|b)?)+")
 def infix_to_postfix(cadena):
 
     # operadores validos
-    op_validos = ["|", "*", ]
+    op_validos = ["|", "*", "."]
     # stack
     stack = []
     # output
