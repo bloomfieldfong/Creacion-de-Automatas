@@ -97,11 +97,6 @@ def expandir(cadena):
     return listToStr(nueva)
 
 
-x = expandir("ab+")
-print(x)
-
-
-
 # Cambia de infix a postdfix
 def infix_to_postfix(cadena):
 
