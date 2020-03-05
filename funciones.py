@@ -9,8 +9,11 @@
 # nos definie la precedencia entre operadores
 def precedencia(op):
     if op == '*':
-        return 2
+        return 3
     if op == '|':
+        return 2
+    
+    if op == ".":
         return 1
     if op == "(":
         return 3
@@ -66,7 +69,7 @@ def expandir(cadena):
                     nueva.append(str("("+listToStr(nueva2[::-1])+"|e)"))
                 #agrega a nuestra lista un str cambiado
                 elif n == "+":
-                    nueva.append(str("("+listToStr(nueva2[::-1])+")("+listToStr(nueva2[::-1])+"*)"))
+                    nueva.append(str("("+listToStr(nueva2[::-1])+").("+listToStr(nueva2[::-1])+"*)"))
                 nueva2 = []
             #else no es un parentesis el ultimo
             else: 
@@ -91,9 +94,7 @@ def expandir(cadena):
                     nueva.append(str("("+listToStr(nueva2[::-1])+").("+listToStr(nueva2[::-1])+"*)"))
                 nueva2 = []
     
-    for i in range(len(nueva)):
-        if nueva[i] == ".":
-            nueva.pop(i)
+
     return listToStr(nueva)
 
 
@@ -169,7 +170,7 @@ def infix_to_postfix(cadena):
         for i in range(len(stack)):
             valores.append(stack[-1])
             stack.pop()
-    print(valores)
+    return valores
 
 
 
