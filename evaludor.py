@@ -15,8 +15,6 @@ class Arbolito:
         print(self.der)
 
 ingreso = infix_to_postfix(expandir(input("Ingrese un lenguaje: ")))
-print(ingreso)
-
 
 i = 0
 trans = []
@@ -40,11 +38,14 @@ while i < len(ingreso):
         concat.append([x,y,z,k])
         final = numero
         numero +=1
+        infin.pop()
+        infin.pop()
+        print([inicial, final])
         infin.append([inicial,final])
         
         
     elif ingreso[i] == "*":
-        
+    
         inicial = infin[-1][0]
         final = infin[-1][1]
         x = [numero, "e", inicial]
@@ -59,30 +60,32 @@ while i < len(ingreso):
         concat.append([v,x,y,z,k])
         
         infin.pop()
-        infin.append( [inicial, final])
+        infin.append([inicial, final])
         numero += 1
+    
         
         
 
     elif ingreso[i] == ".":
-        print(infin)
         x = concat[-1]
         concat.pop()
         y = concat[-1]
         concat.pop()
         automata = infin[-2]
         final = infin[-1][1]
-   
+
         try:
+
             for a in range(len(x)):
                 for n in range(0,2):
-                    print(x[a][n])
                     if x[a][n] == infin[-1][0]:
                         x[a][n] = automata[1]
+
         except:
             for a in range(len(x)):
                     if x[a] == infin[-1][0]:
                         x[a] = automata[1]
+                        
 
         infin.pop()
         infin.pop()
@@ -92,12 +95,11 @@ while i < len(ingreso):
     elif ingreso[i] != "." and ingreso[i] != "|" and ingreso[i] != "*" :
         concat.append([numero, ingreso[i], numero+1])
         infin.append([numero, numero +1])
-        
         numero +=2
-        
     
     i+=1
-
-print(concat)
     
+    
+    
+print(concat)
 

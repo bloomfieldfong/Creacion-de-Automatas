@@ -91,7 +91,7 @@ def expandir(cadena):
                     nueva.append(str("("+listToStr(nueva2[::-1])+"|e)"))
                 elif n == "+":
                     #agrega a nuestra lista un str cambiado
-                    nueva.append(str("("+listToStr(nueva2[::-1])+").("+listToStr(nueva2[::-1])+"*)"))
+                    nueva.append(str(".("+listToStr(nueva2[::-1])+").("+listToStr(nueva2[::-1])+"*)"))
                 nueva2 = []
     
 
