@@ -66,7 +66,7 @@ def expandir(cadena):
                     z-=1
                 #agrega a nuestra lista un str cambiado
                 if n == "?":
-                    nueva.append(str("("+listToStr(nueva2[::-1])+"|e)"))
+                    nueva.append(str(".("+listToStr(nueva2[::-1])+"|e)"))
                 #agrega a nuestra lista un str cambiado
                 elif n == "+":
                     nueva.append(str("("+listToStr(nueva2[::-1])+").("+listToStr(nueva2[::-1])+"*)"))

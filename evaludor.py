@@ -21,35 +21,83 @@ print(ingreso)
 i = 0
 trans = []
 numero = 0
+infin = []
+cant = 0
+concat = []
 while i < len(ingreso):
     
     if ingreso[i] == "|":
-        arriba_iz = trans[-2][0]
-        abajo_iz = trans[-1][0]
-        arriba_der = trans[-2][2]
-        abajo_der = trans[-1][2]
-        trans.append([numero,"e",arriba_iz])
-        trans.append([numero,"e",abajo_iz])
+        arriba_iz = infin[-2][0]
+        abajo_iz = infin[-1][0]
+        arriba_der = infin[-2][1]
+        abajo_der = infin[-1][1]
+        x = [numero,"e",arriba_iz]
+        y = [numero,"e",abajo_iz]
+        inicial = numero
         numero +=1
-        trans.append([arriba_der,"e",numero])
-        trans.append([abajo_der,"e",numero])
+        z = [arriba_der,"e",numero]
+        k = [abajo_der,"e",numero]
+        concat.append([x,y,z,k])
+        final = numero
         numero +=1
+        infin.append([inicial,final])
         
-    if ingreso[i] == "*":
-        pass
-    if ingreso[i] == ".":
-        x = trans[-1]
-        trans.pop()
-        trans.append([trans[-1][2],x[1],x[2]])
+        
+    elif ingreso[i] == "*":
+        
+        inicial = infin[-1][0]
+        final = infin[-1][1]
+        x = [numero, "e", inicial]
+        y = [final, "e", inicial]
+        inicial = numero
+        numero +=1
+        z = [final, "e", numero]
+        k = [inicial, "e", numero]
+        final = numero
+        v = concat[-1]
+        concat.pop()
+        concat.append([v,x,y,z,k])
+        
+        infin.pop()
+        infin.append( [inicial, final])
+        numero += 1
+        
+        
+
+    elif ingreso[i] == ".":
+        print(infin)
+        x = concat[-1]
+        concat.pop()
+        y = concat[-1]
+        concat.pop()
+        automata = infin[-2]
+        final = infin[-1][1]
+   
+        try:
+            for a in range(len(x)):
+                for n in range(0,2):
+                    print(x[a][n])
+                    if x[a][n] == infin[-1][0]:
+                        x[a][n] = automata[1]
+        except:
+            for a in range(len(x)):
+                    if x[a] == infin[-1][0]:
+                        x[a] = automata[1]
+
+        infin.pop()
+        infin.pop()
+        infin.append([automata[0], final])
+        concat.append([y,x])
+
     elif ingreso[i] != "." and ingreso[i] != "|" and ingreso[i] != "*" :
-        trans.append([numero, ingreso[i], numero+1])
+        concat.append([numero, ingreso[i], numero+1])
+        infin.append([numero, numero +1])
+        
         numero +=2
         
-    print(trans)
-
+    
     i+=1
 
-print(trans)
-
-
+print(concat)
+    
 
