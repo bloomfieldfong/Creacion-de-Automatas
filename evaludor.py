@@ -22,25 +22,26 @@ numero = 0
 infin = []
 cant = 0
 concat = []
+respues = []
 while i < len(ingreso):
     
     if ingreso[i] == "|":
-        arriba_iz = infin[-2][0]
-        abajo_iz = infin[-1][0]
-        arriba_der = infin[-2][1]
-        abajo_der = infin[-1][1]
-        x = [numero,"e",arriba_iz]
-        y = [numero,"e",abajo_iz]
+ 
+        x = [numero,"e", infin[-2][0]]
+        y = [numero,"e",infin[-1][0]]
         inicial = numero
         numero +=1
-        z = [arriba_der,"e",numero]
-        k = [abajo_der,"e",numero]
-        concat.append([x,y,z,k])
+        z = [infin[-2][1],"e",numero]
+        k = [infin[-1][1],"e",numero]
+        s = concat[-1]
+        concat.pop()
+        o = concat[-1]
+        concat.pop()
+        concat.append([s,o, x,y,z,k])
         final = numero
         numero +=1
         infin.pop()
         infin.pop()
-        print([inicial, final])
         infin.append([inicial,final])
         
         
@@ -58,39 +59,37 @@ while i < len(ingreso):
         v = concat[-1]
         concat.pop()
         concat.append([v,x,y,z,k])
-        
         infin.pop()
         infin.append([inicial, final])
         numero += 1
     
-        
-        
-
     elif ingreso[i] == ".":
-        x = concat[-1]
+        primera = concat[-1]
         concat.pop()
-        y = concat[-1]
+        segunda = concat[-1]
         concat.pop()
-        automata = infin[-2]
-        final = infin[-1][1]
-
+        orden_ultima = infin[-1]
+        infin.pop()
+        orden_penultima = infin[-1]
+        infin.pop()
+        
+        print(orden_ultima )
+        print(orden_penultima)
         try:
-
-            for a in range(len(x)):
-                for n in range(0,2):
-                    if x[a][n] == infin[-1][0]:
-                        x[a][n] = automata[1]
-
+             for a in range(len(segunda)):
+                 for n in range(0,3):
+                     if segunda[a][n] == orden_penultima[1]:
+                         segunda[a][n] = orden_ultima[0]
+                        
         except:
             for a in range(len(x)):
-                    if x[a] == infin[-1][0]:
-                        x[a] = automata[1]
-                        
-
-        infin.pop()
-        infin.pop()
-        infin.append([automata[0], final])
-        concat.append([y,x])
+                if segunda[a] == orden_penultima[1]:
+                    segunda[a] = orden_ultima[0]
+        
+        
+        
+        infin.append([orden_penultima[0], orden_ultima[1]])
+        concat.append([segunda, primera])
 
     elif ingreso[i] != "." and ingreso[i] != "|" and ingreso[i] != "*" :
         concat.append([numero, ingreso[i], numero+1])
@@ -98,8 +97,4 @@ while i < len(ingreso):
         numero +=2
     
     i+=1
-    
-    
-    
 print(concat)
-
