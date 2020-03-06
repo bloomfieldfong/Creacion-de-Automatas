@@ -22,7 +22,7 @@ numero = 0
 infin = []
 cant = 0
 concat = []
-respues = []
+respuesta = []
 while i < len(ingreso):
     
     if ingreso[i] == "|":
@@ -72,9 +72,6 @@ while i < len(ingreso):
         infin.pop()
         orden_penultima = infin[-1]
         infin.pop()
-        
-        print(orden_ultima )
-        print(orden_penultima)
         try:
              for a in range(len(segunda)):
                  for n in range(0,3):
@@ -82,19 +79,20 @@ while i < len(ingreso):
                          segunda[a][n] = orden_ultima[0]
                         
         except:
-            for a in range(len(x)):
+            for a in range(len(segunda)):
                 if segunda[a] == orden_penultima[1]:
                     segunda[a] = orden_ultima[0]
         
-        
-        
+
         infin.append([orden_penultima[0], orden_ultima[1]])
         concat.append([segunda, primera])
-
+        
     elif ingreso[i] != "." and ingreso[i] != "|" and ingreso[i] != "*" :
         concat.append([numero, ingreso[i], numero+1])
         infin.append([numero, numero +1])
         numero +=2
     
     i+=1
+    
+
 print(concat)
