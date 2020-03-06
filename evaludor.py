@@ -1,18 +1,8 @@
 from funciones import * 
 
-#Es un arbolito
-class Arbolito:
 
-    def __init__(self, padre, izq, der):
-        self.izq = izq
-        self.der = der
-        self.padre = padre
+        
 
-
-    def PrintTree(self):
-        print(self.padre)
-        print(self.izq)
-        print(self.der)
 
 ingreso = infix_to_postfix(expandir(input("Ingrese un lenguaje: ")))
 print(ingreso)
@@ -27,19 +17,14 @@ while i < len(ingreso):
     
     if ingreso[i] == "|":
  
-        x = [numero,"e", infin[-2][0]]
-        y = [numero,"e",infin[-1][0]]
-        inicial = numero
-        numero +=1
-        z = [infin[-2][1],"e",numero]
-        k = [infin[-1][1],"e",numero]
         s = concat[-1]
         concat.pop()
         o = concat[-1]
         concat.pop()
-        concat.append([s,o, x,y,z,k])
-        final = numero
-        numero +=1
+        concat.append([s,o, [numero,"e", infin[-2][0]],[numero,"e",infin[-1][0]],[infin[-2][1],"e",numero+1],[infin[-1][1],"e",numero+1]])
+        inicial = numero
+        final = numero +1
+        numero +=2
         infin.pop()
         infin.pop()
         infin.append([inicial,final])
@@ -94,5 +79,4 @@ while i < len(ingreso):
     
     i+=1
     
-
-print(concat)
+print(flat(concat,[]))

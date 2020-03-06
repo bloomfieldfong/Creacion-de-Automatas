@@ -36,6 +36,23 @@ def str_to_list(cadena):
         i+= 1
     return nueva
 
+
+def flat(l, a):
+    x = []
+    for i in l:
+        if isinstance(i, list):
+            flat(i, a)
+        else:
+            a.append(i)
+    
+    for i in range(0,len(a),3):
+        if i != len(a):
+            x.append([a[i],a[i+1],a[i+2]])
+    
+    return x
+
+            
+
 ##Expande la expresion que vamos a ingresar
 ## cambia el ? = |3 y el a+ = aa*
 def expandir(cadena):
@@ -69,7 +86,7 @@ def expandir(cadena):
                     nueva.append(str(".("+listToStr(nueva2[::-1])+"|e)"))
                 #agrega a nuestra lista un str cambiado
                 elif n == "+":
-                    nueva.append(str(".("+listToStr(nueva2[::-1])+")."+listToStr(nueva2[::-1])+"*)"))
+                    nueva.append(str("("+listToStr(nueva2[::-1])+").("+listToStr(nueva2[::-1])+"*)"))
                 nueva2 = []
             #else no es un parentesis el ultimo
             else: 
@@ -91,9 +108,10 @@ def expandir(cadena):
                     nueva.append(str(".("+listToStr(nueva2[::-1])+"|e)"))
                 elif n == "+":
                     #agrega a nuestra lista un str cambiado
-                    nueva.append(str(".("+listToStr(nueva2[::-1])+")."+listToStr(nueva2[::-1])+"*)"))
+                    nueva.append(str("("+listToStr(nueva2[::-1])+").("+listToStr(nueva2[::-1])+"*)"))
                 nueva2 = []
     
+    nueva = intersperse(nueva, '.')
     asd = listToStr(nueva)
     nueva5 = []
     i = 0
@@ -187,7 +205,12 @@ def infix_to_postfix(cadena):
     return valores
 
 
+def intersperse(lst, item):
+    result = [item] * (len(lst) * 2 - 1)
+    result[0::2] = lst
+    return result
 
 
+print(expandir("(a.c)+.a+"))
 
 
