@@ -15,7 +15,7 @@ class Arbolito:
         print(self.der)
 
 ingreso = infix_to_postfix(expandir(input("Ingrese un lenguaje: ")))
-
+print(ingreso)
 i = 0
 trans = []
 numero = 0

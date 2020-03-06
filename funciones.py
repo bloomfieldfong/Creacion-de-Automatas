@@ -69,7 +69,7 @@ def expandir(cadena):
                     nueva.append(str(".("+listToStr(nueva2[::-1])+"|e)"))
                 #agrega a nuestra lista un str cambiado
                 elif n == "+":
-                    nueva.append(str("("+listToStr(nueva2[::-1])+").("+listToStr(nueva2[::-1])+"*)"))
+                    nueva.append(str(".("+listToStr(nueva2[::-1])+")."+listToStr(nueva2[::-1])+"*)"))
                 nueva2 = []
             #else no es un parentesis el ultimo
             else: 
@@ -88,18 +88,29 @@ def expandir(cadena):
                     v-=1
                 if n == "?":
                     #agrega a nuestra lista un str cambiado
-                    nueva.append(str("("+listToStr(nueva2[::-1])+"|e)"))
+                    nueva.append(str(".("+listToStr(nueva2[::-1])+"|e)"))
                 elif n == "+":
                     #agrega a nuestra lista un str cambiado
-                    nueva.append(str(".("+listToStr(nueva2[::-1])+").("+listToStr(nueva2[::-1])+"*)"))
+                    nueva.append(str(".("+listToStr(nueva2[::-1])+")."+listToStr(nueva2[::-1])+"*)"))
                 nueva2 = []
     
+    asd = listToStr(nueva)
+    nueva5 = []
+    i = 0
+    
+    asd = str_to_list(asd)
+    
+    
+    if asd[0] == ".":
+        asd.pop(0)
+    
 
-    return listToStr(nueva)
-
+        
+    return listToStr(asd)
 
 # Cambia de infix a postdfix
 def infix_to_postfix(cadena):
+    
 
     # operadores validos
     op_validos = ["|", "*", "."]
@@ -110,6 +121,7 @@ def infix_to_postfix(cadena):
     i = 0
 
     while i < len(cadena):
+        
 
         # Si tenemos un parantesis abierto entonces se ira al stack
         if cadena[i] == "(":
@@ -170,8 +182,9 @@ def infix_to_postfix(cadena):
         for i in range(len(stack)):
             valores.append(stack[-1])
             stack.pop()
+            
+    
     return valores
-
 
 
 
