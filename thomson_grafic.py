@@ -2,6 +2,8 @@ from funciones import *
 from operator import itemgetter
 from graphviz import Digraph
 import os
+##environment de mi graficadora
+os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/Graphviz2.38/bin'
 
 def thomson_grafic(ingreso, numero = 2):
         #variables iniciales
@@ -121,7 +123,7 @@ def impresion(resultado, infin):
     print("----------------------------------------------")
         
     
-
+##junta los nfa (cuando son mas de 1)
 def nfa(resultados, infins):
     
     infins =  sorted(infins, key= itemgetter(1))
@@ -129,11 +131,8 @@ def nfa(resultados, infins):
     alto = len(infins)-1
     print(alto)
     numero = infins[alto][1] + 1
-    
     respuesta = flat(resultados, [])
-    
     final = []
-    
     
     for i in range(0,len(infins)):
         respuesta.append([numero,"e",infins[i][0]])
@@ -145,11 +144,17 @@ def nfa(resultados, infins):
     return respuesta, final
         
         
-    
         
-    
-        
-        
+def graficadora(resultado, infin):
+    f = Digraph('finite_state_machine', filename='./automata.gv')
+    f.attr(rankdir='LR', size='8,5')
+    f.attr('node', shape='doublecircle')
+    f.node(str(infin[0][1]))
+    f.attr('node', shape='circle')
+    for i in range(len(resultado)):
+        f.edge(str(resultado[i][0]), str(resultado[i][2]), label= str(resultado[i][1]))
+
+    f.view()
         
         
     
