@@ -1,8 +1,29 @@
-def eclosure_alone():
-    pass
+def eclosure_alone(nodos, lenguaje):
+    if isinstance(nodos, list):
+        for n in nodos:
+            move = posibles_movimientos(n, "e", lenguaje)
+            for x in move:
+                if x[2] not in nodos:
+                    nodos.append(x[2])
+            
+    return nodos
 
-def eclosue(nodo, lenguaje):
-    pass
+def eclosure(nodos, lenguaje):
+    
+    if isinstance(nodos, list):
+        for n in nodos:
+            move = posibles_movimientos(n, "e", lenguaje)
+            for x in move:
+                if x[2] not in nodos:
+                    nodos.append(x[2])
+    
+    comparacion = nodos
+    x = eclosure_alone(nodos, lenguaje) 
+    if  x == comparacion:
+        return comparacion
+    else:
+        eclosure(nodos, lenguaje)
+    
 
 def move(nodos, cadena, lenguaje):
     movimiento = []
@@ -44,4 +65,23 @@ def existe(cadena, lenguaje,infin):
         return "YES"
     else:
         return "NO"
-        
+
+print(eclosure([2],[[1, 'a', 2], [0, 'e',1], [0, 'e', 3], [2, 'e', 1], [2, 'e', 3], [2,"e",5]]))
+
+
+##Funciones necesarias: eclosure(nodos, lenguaje), move(nodos, cadena, lenguaje)
+def dfa_nfa(lenguaje, infin):
+    
+    estados = []
+    simbolos = []
+    for i in range(len(lenguaje)):
+        if lenguaje[i][0] not in estados:
+            estados.append(lenguaje[i][0])
+                
+        if lenguaje[i][2] not in estados:
+            estados.append(lenguaje[i][2])
+                
+        if lenguaje[i][1] not in simbolos:
+            simbolos.append(lenguaje[i][1])
+                
+    
