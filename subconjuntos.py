@@ -66,7 +66,7 @@ def existe(cadena, lenguaje,infin):
     else:
         return "NO"
 
-print(eclosure([2],[[1, 'a', 2], [0, 'e',1], [0, 'e', 3], [2, 'e', 1], [2, 'e', 3], [2,"e",5]]))
+print(eclosure([5],[[2, 'a', 6], [4, 'a', 5], [5, 'e', 4], [5, 'e', 7], [6, 'e', 4], [6, 'e', 7]]))
 
 
 ##Funciones necesarias: eclosure(nodos, lenguaje), move(nodos, cadena, lenguaje)
