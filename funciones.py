@@ -57,8 +57,10 @@ def flat(l, a):
 ## cambia el ? = |3 y el a+ = aa*
 def expandir(cadena):
     
+    
     nueva = []
     nueva2 = []
+    aqui = 0
     #recorre la cadena
     for n in cadena:
         #si la no es ? o + entonces agrega a la nueva lista
@@ -66,8 +68,10 @@ def expandir(cadena):
             nueva.append(n)
         #si es ? o +  
         if n == "?" or n == "+":
+            aqui +=1
             # si existe algun parentesis y es ? o + 
             if (n == "?" and nueva[-1] != ")") or (n == "+" and nueva[-1] != ")"):
+                aqui +=1
                 x = True
                 z = len(nueva)-1
                 while x == True and z != -1:
@@ -83,9 +87,13 @@ def expandir(cadena):
                     z-=1
                 #agrega a nuestra lista un str cambiado
                 if n == "?":
-                    nueva.append(str(".("+listToStr(nueva2[::-1])+"|e)"))
+                   
+                    aqui +=1
+                    nueva.append(str("("+listToStr(nueva2[::-1])+"|e)"))
                 #agrega a nuestra lista un str cambiado
                 elif n == "+":
+       
+                    aqui +=1
                     nueva.append(str("("+listToStr(nueva2[::-1])+").("+listToStr(nueva2[::-1])+"*)"))
                 nueva2 = []
             #else no es un parentesis el ultimo
@@ -104,19 +112,22 @@ def expandir(cadena):
                         nueva.pop()
                     v-=1
                 if n == "?":
+                    aqui +=1
                     #agrega a nuestra lista un str cambiado
-                    nueva.append(str(".("+listToStr(nueva2[::-1])+"|e)"))
+                    
+                    nueva.append(str("("+listToStr(nueva2[::-1])+"|e)"))
                 elif n == "+":
+                    aqui +=1
                     #agrega a nuestra lista un str cambiado
+            
                     nueva.append(str("("+listToStr(nueva2[::-1])+").("+listToStr(nueva2[::-1])+"*)"))
                 nueva2 = []
     
-    nueva = intersperse(nueva, '.')
-    asd = listToStr(nueva)
-    nueva5 = []
+    print(nueva)
+    
     i = 0
     
-    asd = str_to_list(asd)
+    asd = str_to_list(nueva)
     
     
     if asd[0] == ".":
@@ -211,6 +222,5 @@ def intersperse(lst, item):
     return result
 
 
-print(expandir("(a.c)+.a+"))
 
 
