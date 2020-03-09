@@ -124,17 +124,11 @@ def expandir(cadena):
                 nueva2 = []
     
     print(nueva)
-    
     i = 0
-    
     asd = str_to_list(nueva)
-    
-    
     if asd[0] == ".":
         asd.pop(0)
     
-
-        
     return listToStr(asd)
 
 # Cambia de infix a postdfix
