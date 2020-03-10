@@ -5,8 +5,10 @@ def eclosure_alone(nodos, lenguaje):
             for x in move:
                 if x[2] not in nodos:
                     nodos.append(x[2])
-            
-    return nodos
+    s = set()
+    for item in nodos:
+        s.add(item)
+    return s  
 
 def eclosure(nodos, lenguaje):
     
@@ -20,7 +22,10 @@ def eclosure(nodos, lenguaje):
     comparacion = nodos
     x = eclosure_alone(nodos, lenguaje) 
     if  x == comparacion:
-        return comparacion
+        s = set()
+        for item in comparacion:
+            s.add(item)
+        return s
     else:
         eclosure(nodos, lenguaje)
     
@@ -33,14 +38,24 @@ def move(nodos, cadena, lenguaje):
             for x in move:
                 if x[2] not in movimiento:
                     movimiento.append(x[2])
-        return movimiento
+        
+        
+        s = set()
+        for item in movimiento:
+            s.add(item)
+        return s
     
     else:
         move = posibles_movimientos(nodos, cadena, lenguaje)
         for x in move:
             if x[2] not in movimiento:
                 movimiento.append(x[2])
-        return movimiento
+                
+                
+        s = set()
+        for item in movimiento:
+            s.add(item)
+        return s
 
 
 def posibles_movimientos(nodo,cadena, automata):
@@ -66,22 +81,36 @@ def existe(cadena, lenguaje,infin):
     else:
         return "NO"
 
-print(eclosure([5],[[2, 'a', 6], [4, 'a', 5], [5, 'e', 4], [5, 'e', 7], [6, 'e', 4], [6, 'e', 7]]))
+print(move([5,6],"e",[[2, 'a', 6], [4, 'a', 5], [5, 'e', 4], [5, 'e', 7], [6, 'e', 4], [6, 'e', 7]]))
 
 
 ##Funciones necesarias: eclosure(nodos, lenguaje), move(nodos, cadena, lenguaje)
-def dfa_nfa(lenguaje, infin):
+def dfa_nfa(transiciones, infin[0]):
     
     estados = []
     simbolos = []
-    for i in range(len(lenguaje)):
-        if lenguaje[i][0] not in estados:
-            estados.append(lenguaje[i][0])
+    for i in range(len(transiciones)):
+        if transiciones[i][0] not in estados:
+            estados.append(transiciones[i][0])
                 
-        if lenguaje[i][2] not in estados:
-            estados.append(lenguaje[i][2])
+        if transiciones[i][2] not in estados:
+            estados.append(transiciones[i][2])
                 
-        if lenguaje[i][1] not in simbolos:
-            simbolos.append(lenguaje[i][1])
+        if transiciones[i][1] not in simbolos:
+            simbolos.append(transiciones[i][1])
+            
+    #infin[0] = inicial
+    #transiciones
+    i = 0
+    Dstate =[]
+    Dstate.append(eclosure_alone(infin[0], transiciones))
+    
+    while i < len(Dstate):
+    
+    
+    
+            
+    
+    
                 
     

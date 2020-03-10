@@ -22,7 +22,7 @@ while x:
         #imprime el automata
         impresion(resultado,infin)
         ##Grafica nuestro automata
-        #graficadora(resultado, infin)
+        graficadora(resultado, infin)
         print(infin)
         mensaje = input("Ingrese el mensaje que desea saber si pertenece al lenguaje: ")
         
@@ -37,7 +37,7 @@ while x:
         #imprime el automata
         impresion(resultado,infin)
         ##Grafica nuestro automata
-        #graficadora(resultado, infin)
+        graficadora(resultado, infin)
         
     if menu == "3":
         
@@ -60,6 +60,6 @@ while x:
         impresion(resultado, final)
 
         ##Grafica nuestro automata
-        #graficadora(resultado, final)
+        graficadora(resultado, final)
 
 

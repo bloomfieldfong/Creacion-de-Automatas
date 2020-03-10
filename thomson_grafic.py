@@ -149,7 +149,9 @@ def graficadora(resultado, infin):
     f = Digraph('finite_state_machine', filename='./automata.gv')
     f.attr(rankdir='LR', size='8,5')
     f.attr('node', shape='doublecircle')
-    f.node(str(infin[0][1]))
+    for i in range(len(infin)):
+        
+        f.node(str(infin[i][1]))
     f.attr('node', shape='circle')
     for i in range(len(resultado)):
         f.edge(str(resultado[i][0]), str(resultado[i][2]), label= str(resultado[i][1]))
