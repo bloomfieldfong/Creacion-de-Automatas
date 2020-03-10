@@ -124,7 +124,7 @@ def impresion(resultado, infin):
         
     
 ##junta los nfa (cuando son mas de 1)
-def nfa(resultados, infins):
+def juntar_nfa(resultados, infins):
     
     infins =  sorted(infins, key= itemgetter(1))
     print(infins)
@@ -150,7 +150,6 @@ def graficadora(resultado, infin):
     f.attr(rankdir='LR', size='8,5')
     f.attr('node', shape='doublecircle')
     for i in range(len(infin)):
-        
         f.node(str(infin[i][1]))
     f.attr('node', shape='circle')
     for i in range(len(resultado)):

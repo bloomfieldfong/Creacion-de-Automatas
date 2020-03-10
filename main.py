@@ -23,8 +23,7 @@ while x:
         impresion(resultado,infin)
         ##Grafica nuestro automata
         graficadora(resultado, infin)
-        print(infin)
-        mensaje = input("Ingrese el mensaje que desea saber si pertenece al lenguaje: ")
+        
         
         
         
@@ -34,32 +33,32 @@ while x:
         ingreso = infix_to_postfix(expandir(input("Ingrese un lenguaje: ")))
         ##resultado son los movimientos y infin es el estado inicial y el final
         resultado, infin = thomson_grafic(ingreso)
+        tabla, infin_nuevo = dfa_nfa(resultado, infin)
+        
         #imprime el automata
-        impresion(resultado,infin)
+        impresion(tabla,infin_nuevo)
         ##Grafica nuestro automata
-        graficadora(resultado, infin)
+        graficadora(tabla, infin_nuevo)
+
+        mensaje = input("Ingrese el mensaje que desea saber si pertenece al lenguaje: ")
+        print(existe(mensaje, tabla, infin_nuevo))
         
     if menu == "3":
-        
-        ##Nos pregunta cuantos lenguajes vamos a utilizar
-        ingreso_cantidad = int(input("Cuantos lenguajes ingresara: "))
+
+        ingreso_cantidad = int(input("Cuantas expresiones ingresara: "))
         resultados = []
         infins = []
-        cantidad = 2
-        ##ingrese la cantidad de lenguajes que se estaran ingresando
+        cantidad = 2 
         for i in range((ingreso_cantidad)):
             ingreso = infix_to_postfix(expandir(input("Ingrese un lenguaje: ")))
             resultado, infin = thomson_grafic(ingreso, cantidad)
             resultados.append(resultado)
-            print(infin)
             infins.append(infin[0])
             cantidad = infin[0][1] + 1
-            
-        resultado, final = nfa(resultados, infins)
-        
-        impresion(resultado, final)
 
-        ##Grafica nuestro automata
-        graficadora(resultado, final)
+        resultado, final = juntar_nfa(resultados, infins)
 
+        tabla, infin_nuevo = dfa_nfa(resultado, final)
+        impresion(tabla, infin_nuevo)
+        graficadora(tabla, infin_nuevo)
 
