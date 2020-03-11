@@ -12,7 +12,6 @@ def precedencia(op):
         return 3
     if op == '|':
         return 2
-    
     if op == ".":
         return 1
     if op == "(":
@@ -37,6 +36,7 @@ def str_to_list(cadena):
     return nueva
 
 
+##nos devuelve las transiciones sin tanto parentesis
 def flat(l, a):
     x = []
     for i in l:
@@ -205,8 +205,6 @@ def infix_to_postfix(cadena):
         for i in range(len(stack)):
             valores.append(stack[-1])
             stack.pop()
-            
-    
     return valores
 
 

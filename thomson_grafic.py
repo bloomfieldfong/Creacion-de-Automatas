@@ -89,6 +89,9 @@ def thomson_grafic(ingreso, numero = 2):
     return resultado, infin
 
 
+##imprime el automata
+#resultado = las transiciones del automata
+#infin = estado inicial y final
 def impresion(resultado, infin):
     
     estados = []
@@ -103,27 +106,29 @@ def impresion(resultado, infin):
         if resultado[i][1] not in simbolos:
             simbolos.append(resultado[i][1])
                 
-    print("----------------------------------------------")
+    print("--------------------------------------------------------------------------------------")
     print("Q -> Estados")
     print(estados)
-    print("----------------------------------------------")
+    print("--------------------------------------------------------------------------------------")
     print("E -> simbolos")
     print(simbolos)
-    print("----------------------------------------------")
+    print("--------------------------------------------------------------------------------------")
     print("q0 -> Estado inicial: ")
     for i in range(len(infin)):
         print(infin[i][0])
-    print("----------------------------------------------")
+    print("--------------------------------------------------------------------------------------")
     print("F -> Estado de Aceptacion: ")
     for i in range(len(infin)):
         print(infin[i][1])
-    print("----------------------------------------------")
+    print("--------------------------------------------------------------------------------------")
     print("Transiciones:")
     print(resultado)
-    print("----------------------------------------------")
+    print("--------------------------------------------------------------------------------------")
         
     
 ##junta los nfa (cuando son mas de 1)
+#resultado = las transiciones del automata
+#infin = estado inicial y final
 def juntar_nfa(resultados, infins):
     
     infins =  sorted(infins, key= itemgetter(1))

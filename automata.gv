@@ -3,21 +3,22 @@ digraph finite_state_machine {
 	node [shape=doublecircle]
 	B
 	C
-	D
+	E
+	G
+	C
+	H
+	H
 	G
 	G
-	D
-	J
 	node [shape=circle]
 	A -> B [label=a]
 	A -> C [label=b]
 	B -> D [label=a]
 	B -> E [label=b]
-	E -> G [label=a]
+	C -> G [label=b]
+	D -> D [label=a]
+	D -> C [label=b]
 	E -> H [label=b]
-	G -> I [label=b]
-	H -> D [label=a]
-	H -> H [label=b]
-	I -> J [label=a]
-	J -> I [label=b]
+	G -> G [label=b]
+	H -> G [label=b]
 }
