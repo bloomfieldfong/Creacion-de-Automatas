@@ -30,7 +30,7 @@ def eclosure(x, lenguaje):
             move = posibles_movimientos(n, "e", lenguaje)
             for x in move:
                 if x[2] not in nodos:
-                    nodos.append(x[2])ds
+                    nodos.append(x[2])
     s = set()
     for item in nodos:
         s.add(item)
@@ -104,7 +104,7 @@ def dfa_nfa(transiciones, infin):
     
     ## nos retorna los simbolos que existen en nuestras transiciones
     simbolos = []
-    for i in range(len(transiciones)):s
+    for i in range(len(transiciones)):
         if transiciones[i][1] != "e":
             if transiciones[i][1] not in simbolos:
                 simbolos.append(transiciones[i][1])
@@ -160,8 +160,6 @@ def dfa_nfa(transiciones, infin):
     y = []
     for i in range(1,len(infin_nuevo)):
         y.append([infin_nuevo[0],infin_nuevo[i]])
-        
-   
     return tablita, y
         
     
