@@ -3,15 +3,9 @@ digraph finite_state_machine {
 	node [shape=doublecircle]
 	B
 	C
-	D
-	F
-	D
-	F
+	C
 	node [shape=circle]
 	A -> B [label=a]
-	A -> C [label=b]
-	B -> D [label=a]
-	C -> F [label=b]
-	D -> D [label=a]
-	F -> F [label=b]
+	B -> C [label=a]
+	C -> C [label=a]
 }

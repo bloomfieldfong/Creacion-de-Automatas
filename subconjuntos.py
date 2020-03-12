@@ -131,7 +131,12 @@ def dfa_nfa(transiciones, infin):
             if u not in Dstate and u is not None:
                 Dstate.append(u)         
         i+=1
-
+    
+    
+    print("Proceso de cambio de NFA a DFA")
+    for m in tablita:
+        print(m)
+    print("--------------------------------------------------------------------------------------")
     ##Editamos lo que nos devuelve ya que tenemos vacios
     x = 0
     while x < len(tablita):
