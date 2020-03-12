@@ -1,8 +1,8 @@
-def nullable(n, lista):
-    if n == "e":
+def nullable(n, variables):
+    if n[0]== "e":
         return True
-    if n in lista:
-        return lista.index(n)
+    if n[0] in variables:
+        return n[1]
     
 
 def fistpos():

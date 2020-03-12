@@ -1,11 +1,12 @@
 digraph finite_state_machine {
 	rankdir=LR size="8,5"
 	node [shape=doublecircle]
-	B
-	C
-	C
+	7
 	node [shape=circle]
-	A -> B [label=a]
-	B -> C [label=a]
-	C -> C [label=a]
+	2 -> 6 [label=a]
+	4 -> 5 [label=a]
+	5 -> 4 [label=e]
+	5 -> 7 [label=e]
+	6 -> 4 [label=e]
+	6 -> 7 [label=e]
 }
