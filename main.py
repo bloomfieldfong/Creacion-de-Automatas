@@ -14,8 +14,9 @@ while x:
     menu = input("1. Contruccion de Thomson \n2. Contruccion de Subconjuntos \n3. Constuccion de de DFA de multiples automatas (Thomson y Subconjuntos)  \n4. DFA\n")
     ##crea un grafo con la contruccion de Thomson
     if menu == "1":
-        ##ingrese el lenguaje 
-        ingreso = infix_to_postfix(expandir(input("Ingrese un lenguaje: ")))
+        ##ingrese el exppresion 
+        ingreso = infix_to_postfix(expandir(input("Ingrese una expresion: ")))
+        print(ingreso)
         ##resultado son los movimientos y infin es el estado inicial y el final
         resultado, infin = thomson_grafic(ingreso)
         #imprime el automata
@@ -24,10 +25,12 @@ while x:
         graficadora(resultado, infin)
         
         
+        
     ##crea un grafo con la contruccion de Thomson y utiliza lols subconjuntos para realizar un dfa 
     if menu == "2":
-        ##ingrese el lenguaje 
-        ingreso = infix_to_postfix(expandir(input("Ingrese un lenguaje: ")))
+        ##ingrese la expresion 
+        ingreso = infix_to_postfix(expandir(input("Ingrese una expresion: ")))
+        print(ingreso)
         ##resultado son los movimientos y infin es el estado inicial y el final
         resultado, infin = thomson_grafic(ingreso)
         tabla, infin_nuevo = dfa_nfa(resultado, infin)
@@ -49,7 +52,7 @@ while x:
         cantidad = 2
         ##realiza los automatas
         for i in range((ingreso_cantidad)):
-            ingreso = infix_to_postfix(expandir(input("Ingrese un lenguaje: ")))
+            ingreso = infix_to_postfix(expandir(input("Ingrese una expresion: ")))
             resultado, infin = thomson_grafic(ingreso, cantidad)
             resultados.append(resultado)
             infins.append(infin[0])

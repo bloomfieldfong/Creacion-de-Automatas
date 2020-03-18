@@ -114,10 +114,9 @@ def dfa_nfa(transiciones, infin):
     i = 0
     Dstate =[]
     tablita = []
-    Dstate.append(eclosure(infin[0], transiciones))
+    Dstate.append(eclosure(infin[0][0], transiciones))
     infin_nuevo =[]
-    
-    infin_nuevo.append(eclosure(infin[0], transiciones))
+    infin_nuevo.append(eclosure(infin[0][0], transiciones))
     
     
     ##algoritmo utilizado en clase
@@ -152,20 +151,27 @@ def dfa_nfa(transiciones, infin):
         x +=1
     x = 0
     
+    
+    print(Dstate)
+    print(tablita)
+    print(infin_nuevo)
     #cambiamos el estado final y el inicial 
     while x < len(infin_nuevo):
         indice1 = Dstate.index(infin_nuevo[x])
         infin_nuevo[x]= alfabeto[indice1]
         x+=1
     y = []
+    
     for i in range(1,len(infin_nuevo)):
         y.append([infin_nuevo[0],infin_nuevo[i]])
     return tablita, y
         
     
    
-    
-  
+#tablita, y = dfa_nfa([[1,"e",2],[1,"e",8],[2,"e",3],[2,"e",4], [3,"a",5], [4,"b",6], [5,"e",7], [6,"e",7], [7,"e",2],[8,"a",9], [9,"e",10], [9,"e",13], [10,"e",11], [10,"e",12], [11,"a",14], [12,"b",15], [13,"e",16], [14,"e",17], [15,"e",17],[16,"e",18],[17,"e",18] ], [[1,18]])
+#graficadora(tablita, y)
+
+
 
                 
     

@@ -120,7 +120,7 @@ def expandir(cadena):
                     aqui +=1
                     #agrega a nuestra lista un str cambiado
             
-                    nueva.append(str("("+listToStr(nueva2[::-1])+").("+listToStr(nueva2[::-1])+"*)"))
+                    nueva.append(str("("+listToStr(nueva2[::-1])+").("+listToStr(nueva2[::-1])+"*"))
                 nueva2 = []
     
     print(nueva)

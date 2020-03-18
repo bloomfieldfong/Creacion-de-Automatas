@@ -63,6 +63,7 @@ def thomson_grafic(ingreso, numero = 2):
             orden_penultima = infin[-1]
             infin.pop()
             try:
+                 segunda = flat(segunda, [])
                  for a in range(len(segunda)):
                      for n in range(0,3):
                          if segunda[a][n] == orden_penultima[1]:
@@ -132,9 +133,9 @@ def impresion(resultado, infin):
 def juntar_nfa(resultados, infins):
     
     infins =  sorted(infins, key= itemgetter(1))
-    print(infins)
+
     alto = len(infins)-1
-    print(alto)
+
     numero = infins[alto][1] + 1
     respuesta = flat(resultados, [])
     final = []
@@ -143,8 +144,6 @@ def juntar_nfa(resultados, infins):
         respuesta.append([numero,"e",infins[i][0]])
         final.append([numero, infins[i][1]])
         
-        
-    print(respuesta)
     
     return respuesta, final
         
