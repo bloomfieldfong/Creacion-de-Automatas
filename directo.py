@@ -1,4 +1,10 @@
 from funciones import * 
+def nullable(n, variables):
+    if n[0]== "e":
+        return True
+    if n[0] in variables:
+        return n[1]
+    
 
 #nos devuelve si es nullable 
 def nullable(n,pos):
@@ -118,3 +124,6 @@ def anteriores_firtspos(n,pos):
 
 
 print(nullable(['a', 'a', '*', '.', 'b'],4))
+
+print(nullable("i",["i","i","r"]))
+
