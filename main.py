@@ -11,12 +11,22 @@ os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/Graphviz2.38/bin'
 x = True
 while x:
     
-    menu = input("1. Contruccion de Thomson \n2. Contruccion de Subconjuntos \n3. Constuccion de de DFA de multiples automatas (Thomson y Subconjuntos)  \n4. DFA\n")
+    menu = input("1. Contruccion de Thomson \n2. Contruccion de Subconjuntos \n3. Constuccion de de DFA de multiples automatas (Thomson y Subconjuntos)  \n4. Metodo directo\n")
     ##crea un grafo con la contruccion de Thomson
     if menu == "1":
         ##ingrese el exppresion 
         ingreso = infix_to_postfix(expandir(input("Ingrese una expresion: ")))
+        
+        
+        i = 0
+        while i < len(ingreso):
+            if ingreso[i] == "(":
+                ingreso.pop(i)
+                i-=1
+            i+=1
+                
         print(ingreso)
+                
         ##resultado son los movimientos y infin es el estado inicial y el final
         resultado, infin = thomson_grafic(ingreso)
         #imprime el automata
@@ -69,6 +79,9 @@ while x:
         ##mensaje que queremos ver si existe
         mensaje = input("Ingrese el mensaje que desea saber si pertenece al lenguaje: ")
         print(existe(mensaje, tabla, infin_nuevo))
+        
+    if menu == "4":
+        pass
         
         
 

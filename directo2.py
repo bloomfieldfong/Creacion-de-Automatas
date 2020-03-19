@@ -165,6 +165,67 @@ def lastpos(n,pos):
 
 
 
-def followpos(n,pos):
+def followpos(n):
+    posi = ["*","."]
+    respuesta = []
+    s = ["a","b", "c"]
+    for i in range(len(n)):
+        if n[i] in posi :
+            if n[i] == '.':
+                for a in lastpos(n,i-1):
+                    
+                    if len(respuesta) >0:
+                        
+                        if isinstance(respuesta[-1], list):
+                            nueva = []
+                            for o in range(len(respuesta[-1])):
+                                nueva.append(respuesta[-1][o].union(firstpos(n,i-1)))
+                            respuesta.pop()
+                            respuesta.append(nueva)
+                            respuesta.append(firstpos(n,i-1))
+                        else:
+                            respuesta.append(firstpos(n,i-1))
+                    else:
+                        
+                        if len(respuesta) == 0:
+                            l = []
+                            f= []
+                            for z in range(i-1):
+                                if n[z] in s:
+                                    l.append(firstpos(n,z))
+                                
+                            for m in range(len(l)):
+                                f.append(set().union(*l))
+                            
+                            respuesta.append(f)
+                            if isinstance(respuesta[-1], list):
+                                nueva = []
+                                for o in range(len(respuesta[-1])):
+                                    nueva.append(respuesta[-1][o].union(firstpos(n,i-1)))
+                                respuesta.pop()
+                                respuesta.append(nueva)
+                                
+                        respuesta.append(firstpos(n,i-1))
+                    
+                        
+            elif n[i] == '*':
+                x = []
+                for a in lastpos(n,i):
+                    x.append(firstpos(n,a))
+                
+                if len(lastpos(n,i)) >1:
+                    y = []
+                    for w in range(len(lastpos(n,i))):
+                        y.append(set().union(*x))
+                    respuesta.append(y)
+                else:
+                    respuesta.append(firstpos(n,a))
+                
     
-    pass 
+    return respuesta
+        
+    
+
+print(postfix_arbol(expandir("((a|b)*).a.b.b")))
+print(followpos(['a', 'b', '|', 'c', '.']))
+            
