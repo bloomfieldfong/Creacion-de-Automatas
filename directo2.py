@@ -1,5 +1,4 @@
 from funciones import * 
-
 # Cambia de infix a postdfix
 def postfix_arbol(cadena):
     
@@ -168,22 +167,22 @@ def lastpos(n,pos):
 def followpos(n):
     posi = ["*","."]
     respuesta = []
-    s = ["a","b", "c"]
+    s = ["a","b", "c","#"]
     for i in range(len(n)):
         if n[i] in posi :
             if n[i] == '.':
                 for a in lastpos(n,i-1):
-                    
                     if len(respuesta) >0:
-                        
                         if isinstance(respuesta[-1], list):
                             nueva = []
                             for o in range(len(respuesta[-1])):
                                 nueva.append(respuesta[-1][o].union(firstpos(n,i-1)))
                             respuesta.pop()
-                            respuesta.append(nueva)
-                            respuesta.append(firstpos(n,i-1))
+                            respuesta.append(nueva[0])
+                            respuesta.append(nueva[1])
+                            
                         else:
+        
                             respuesta.append(firstpos(n,i-1))
                     else:
                         
@@ -215,17 +214,53 @@ def followpos(n):
                 
                 if len(lastpos(n,i)) >1:
                     y = []
+                    
                     for w in range(len(lastpos(n,i))):
                         y.append(set().union(*x))
+                    print(y)
                     respuesta.append(y)
                 else:
                     respuesta.append(firstpos(n,a))
-                
-    
-    return respuesta
+    nodos = []
+    letras = []
+    for i in range(len(n)):
+        if n[i] in s:
+            nodos.append(i)
+            letras.append(n[i])
+            
+    return respuesta, nodos, letras
         
+
+def directo(tabla):
+    izq = tabla[0]
+    nodos = tabla[1]
+    nodos.pop()
+    letras = tabla[2]
+    letras.pop()
+    print(izq)
+    print(nodos)
+    print(letras)
+                
+                
+#            ## m in range der = [[0, 'a'], [1, 'b'], [4, 'a'], [6, 'b'], [8, 'b'],[10,"#"]]
+#                ## lista(izq[n])[m] = 0, 1 ,4 der[s][0] = que posicion tiene cada letra
+#                ## der[s][1] = der[n][1]
+#                if list(respuesta[n])[m] == der[s][0] and der[s][1] == posi[s] and n!=s:
+#                    respuesta.append(izq[n].union(izq[s]))
+#                    otro.append(der[n][1])
+#
     
 
-print(postfix_arbol(expandir("((a|b)*).a.b.b")))
-print(followpos(['a', 'b', '|', 'c', '.']))
+                    
+                
+    
+#print(firstpos(['a', 'b', '|', '*', 'a', '.', 'b', '.', 'b', '.','#','.'], 7))
+#print(postfix_arbol(expandir("((b|b)*).a.b.b.((a|b)*)")))
+#x =['a', 'b', '|', '*', 'a', '.', 'b', '.', 'b', '.', '#','.']
+#x = ['b', 'b', '|', '*', 'a', '.', 'b', '.', 'b', '.', 'a', 'b', '|', '*', '.', "#", "."]
+#for n in range(len(x)):
+#    print(firstpos(x,n))
+#print(followpos(x))
+
+directo(([{0, 1, 4}, {0, 1, 4}, {6}, {8}, {10}], [0, 1, 4, 6, 8, 10], ['a', 'b', 'a', 'b', 'b', '#']))
             

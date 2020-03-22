@@ -1,6 +1,7 @@
 from funciones import * 
 from operator import itemgetter
 from graphviz import Digraph
+from subconjuntos import *
 import os
 ##environment de mi graficadora
 os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/Graphviz2.38/bin'
@@ -161,8 +162,79 @@ def graficadora(resultado, infin):
 
     f.view()
         
-        
+def existe2(cadena, lenguaje, infin):
+    a = 0
+    inicial =[]
+    inicial.append(infin[0][0])
+
+    for n in cadena:
+        while a<  len(inicial):
+
+            x = move({inicial[a]}, n, lenguaje)
+            y = move({inicial[a]}, "e", lenguaje)
+            
+            x = list(x)
+            y = list(y)
+            
+            if len(x)>0:
+                inicial.append(x[0])
+            if len(y)>0:
+                
+                if y[0]== infin[0][1]:
+                    return "Yes"
+                for z in range(len(y)):
+                    x.append(posibles_movimientos(y[z],n, lenguaje))
+                
+                for p in range(len(x)):
+                    if len(x[p])!=0:
+                        s = x[p][0]
+                        inicial.append(s[2])
+                   
+            
+            a+=1
+            
+    z = 0
+    print(inicial)
+    for n in range(len(inicial)):
+        if inicial[n] == infin[0][1]:
+            z +=1
     
+    if z >0:
+        return "Yes"
+    else:
+        return "N0"
+
+#    i = 0
+#    print(infin)
+#    inicial = infin[0][0]
+#    for n in cadena:
+#        print(n)
+#        x = move(inicial, n, lenguaje)
+#        z = move(inicial,"e",lenguaje)
+#        if len(x)==0 and move(inicial, "e",lenguaje) ==0:
+#            return "NO"
+#        x = list(x)
+#        print(z)
+#        z = list(z)
+#        if len(x)>0:
+#            inicial = x[0]
+#        else:
+#            if len(y)==1:
+#                inicial = y[0]
+#            else:
+#                print(m)
+#                for m in len(y):
+#                    y = move(m[0], n, lenguaje)
+#    i = 0 
+#    for n in range(len(infin)):
+#        if inicial == infin[n][1]:
+#            i += 1
+#    if i !=0:
+#        return "YES"
+#    else:
+#        return "NO"
+#        
+#    
     
     
     

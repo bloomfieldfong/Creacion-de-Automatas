@@ -41,6 +41,7 @@ def eclosure(x, lenguaje):
 # cadena = que letra vamos a mover
 # lenguaje = nuestras transiciones
 def move(nodos, cadena, lenguaje):
+
     nodos = list(nodos)
     movimiento = []
     if isinstance(nodos, list):
@@ -84,8 +85,11 @@ def posibles_movimientos(nodo,cadena, automata):
 def existe(cadena, lenguaje,infin):
     i = 0
     inicial = infin[0][0]
+    print(inicial)
     for n in cadena:
         x = move(inicial, n, lenguaje)
+        if len(x)==0:
+            return "NO"
         x = list(x)
         inicial = x[0]
     i = 0 
@@ -172,7 +176,7 @@ def dfa_nfa(transiciones, infin):
     return tablita, y
         
     
-   
+
 #tablita, y = dfa_nfa([[1,"e",2],[1,"e",8],[2,"e",3],[2,"e",4], [3,"a",5], [4,"b",6], [5,"e",7], [6,"e",7], [7,"e",2],[8,"a",9], [9,"e",10], [9,"e",13], [10,"e",11], [10,"e",12], [11,"a",14], [12,"b",15], [13,"e",16], [14,"e",17], [15,"e",17],[16,"e",18],[17,"e",18] ], [[1,18]])
 #graficadora(tablita, y)
 

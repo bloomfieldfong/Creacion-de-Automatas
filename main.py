@@ -29,10 +29,13 @@ while x:
                 
         ##resultado son los movimientos y infin es el estado inicial y el final
         resultado, infin = thomson_grafic(ingreso)
+        print(infin)
         #imprime el automata
         impresion(resultado,infin)
         ##Grafica nuestro automata
         graficadora(resultado, infin)
+        mensaje = input("Ingrese el mensaje que desea saber si pertenece al lenguaje: ")
+        print(existe2(mensaje, resultado, infin))
         
         
         
@@ -42,6 +45,12 @@ while x:
         ingreso = infix_to_postfix(expandir(input("Ingrese una expresion: ")))
         print(ingreso)
         ##resultado son los movimientos y infin es el estado inicial y el final
+        i = 0
+        while i < len(ingreso):
+            if ingreso[i] == "(":
+                ingreso.pop(i)
+                i-=1
+            i+=1
         resultado, infin = thomson_grafic(ingreso)
         tabla, infin_nuevo = dfa_nfa(resultado, infin)
         
@@ -82,6 +91,5 @@ while x:
         
     if menu == "4":
         pass
-        
         
 
