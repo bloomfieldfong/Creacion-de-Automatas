@@ -1,4 +1,6 @@
-from funciones import * 
+from funciones import *
+
+import os
 # Cambia de infix a postdfix
 def postfix_arbol(cadena):
     
@@ -65,7 +67,7 @@ def postfix_arbol(cadena):
                 primero +=1
             
             if primero == 1:
-                print("")
+                
                 primero +=1
             else: 
                 valores.append(cadena[i])
@@ -165,6 +167,8 @@ def lastpos(n,pos):
 
 
 def followpos(n):
+    n.append("#")
+    n.append(".")
     posi = ["*","."]
     respuesta = []
     s = ["a","b", "c","#"]
@@ -217,7 +221,7 @@ def followpos(n):
                     
                     for w in range(len(lastpos(n,i))):
                         y.append(set().union(*x))
-                    print(y)
+                    
                     respuesta.append(y)
                 else:
                     respuesta.append(firstpos(n,a))
@@ -228,19 +232,73 @@ def followpos(n):
             nodos.append(i)
             letras.append(n[i])
             
-    return respuesta, nodos, letras
+    return [respuesta, nodos, letras]
         
 
 def directo(tabla):
+    tabla = followpos(tabla)
+
     izq = tabla[0]
     nodos = tabla[1]
-    nodos.pop()
     letras = tabla[2]
-    letras.pop()
-    print(izq)
-    print(nodos)
-    print(letras)
-                
+    
+    posi = ["a","b"]
+    res  =[]
+    res.append(izq[0])
+    movi = []
+    i = 0
+    while i< len(res):
+       
+        listas  = []
+        letritas = []
+        for x in range(len(res[i])): #{0,1,4}
+            nuevaizq = list(res[i])
+            for m in posi: #["a","b"]#
+                if letras[nodos.index(nuevaizq[x])] == m:
+                    listas.append(izq[nodos.index(nuevaizq[x])])
+                    letritas.append(m)
+
+        a = []
+        b = []
+        for e in range(len(letritas)):
+            if letritas[e] == "a":
+                a.append(list(listas[e]))
+            if letritas[e] == "b":
+                b.append(list(listas[e]))
+                    
+        a = set().union(*a)
+        b = set().union(*b)
+        if len(a) != 0:
+            movi.append([res[i], "a", a])
+            
+        if len(b) != 0:
+            movi.append([res[i], "b", b])
+        
+        if a not in res and len(a) != 0:
+            res.append(a)
+        if b not in res and len(b) != 0:
+            res.append(b)
+        i+=1
+        
+    alfabeto =["A","B","C","D","E","F","G","H","I","J"]
+    x = 0
+    print("Movimientos sin cambio de variables")
+    print(movi)
+    while x < len(movi):
+        indice1 = res.index(movi[x][0])
+        movi[x][0] = alfabeto[indice1]
+        indice1 = res.index(movi[x][2])
+        movi[x][2] = alfabeto[indice1]
+        x +=1
+    x = 0
+    infin =[alfabeto[res.index(res[0])], alfabeto[res.index(res[len(res)-1])] ]
+    return movi, infin
+
+
+
+        
+
+
                 
 #            ## m in range der = [[0, 'a'], [1, 'b'], [4, 'a'], [6, 'b'], [8, 'b'],[10,"#"]]
 #                ## lista(izq[n])[m] = 0, 1 ,4 der[s][0] = que posicion tiene cada letra
@@ -256,11 +314,13 @@ def directo(tabla):
     
 #print(firstpos(['a', 'b', '|', '*', 'a', '.', 'b', '.', 'b', '.','#','.'], 7))
 #print(postfix_arbol(expandir("((b|b)*).a.b.b.((a|b)*)")))
+
 #x =['a', 'b', '|', '*', 'a', '.', 'b', '.', 'b', '.', '#','.']
-#x = ['b', 'b', '|', '*', 'a', '.', 'b', '.', 'b', '.', 'a', 'b', '|', '*', '.', "#", "."]
+x = ['b', 'b', '|', '*', 'a', '.', 'b', '.', 'b', '.', 'a', 'b', '|', '*', '.']
+#x = ['a', 'b', '|', '*', 'a', '.', 'b', '.', 'b', '.']
 #for n in range(len(x)):
 #    print(firstpos(x,n))
 #print(followpos(x))
 
-directo(([{0, 1, 4}, {0, 1, 4}, {6}, {8}, {10}], [0, 1, 4, 6, 8, 10], ['a', 'b', 'a', 'b', 'b', '#']))
+#print(directo(x))
             

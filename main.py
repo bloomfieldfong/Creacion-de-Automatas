@@ -4,6 +4,7 @@ from graphviz import Digraph
 import os
 from thomson_grafic import *
 from subconjuntos import *
+from directo2 import *
 
 ##environment de mi graficadora
 os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/Graphviz2.38/bin'
@@ -35,7 +36,10 @@ while x:
         ##Grafica nuestro automata
         graficadora(resultado, infin)
         mensaje = input("Ingrese el mensaje que desea saber si pertenece al lenguaje: ")
+        
         print(existe2(mensaje, resultado, infin))
+      
+
         
         
         
@@ -56,10 +60,12 @@ while x:
         
         #imprime el automata
         impresion(tabla,infin_nuevo)
+        print(infin_nuevo)
         ##Grafica nuestro automata
-        graficadora(tabla, infin_nuevo)
+        #graficadora(tabla, infin_nuevo)
         ##mensaje que queremos ver si existe
         mensaje = input("Ingrese el mensaje que desea saber si pertenece al lenguaje: ")
+        print(infin_nuevo)
         print(existe(mensaje, tabla, infin_nuevo))
         
     if menu == "3":
@@ -90,6 +96,23 @@ while x:
         print(existe(mensaje, tabla, infin_nuevo))
         
     if menu == "4":
-        pass
+        ingreso = postfix_arbol(expandir(input("Ingrese una expresion: ")))
+        print(ingreso)
+        i = 0
+        while i < len(ingreso):
+            if ingreso[i] == "(":
+                ingreso.pop(i)
+                i-=1
+            i+=1
+            
+        tabla,infin = directo(ingreso)
+        impresion(tabla, [infin])
+
+        graficadora(tabla,[infin])
+        
+        mensaje = input("Ingrese el mensaje que desea saber si pertenece al lenguaje: ")
+        print(existe(mensaje, tabla, [infin]))
+        
+        
         
 

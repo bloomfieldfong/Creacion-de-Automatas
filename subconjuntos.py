@@ -41,12 +41,11 @@ def eclosure(x, lenguaje):
 # cadena = que letra vamos a mover
 # lenguaje = nuestras transiciones
 def move(nodos, cadena, lenguaje):
-
     nodos = list(nodos)
     movimiento = []
     if isinstance(nodos, list):
-        for n in nodos:
-            move = posibles_movimientos(n, cadena, lenguaje)
+        for n in range(len(nodos)):
+            move = posibles_movimientos(nodos[n], cadena, lenguaje)
             for x in move:
                 if x[2] not in movimiento:
                     movimiento.append(x[2])
@@ -85,8 +84,9 @@ def posibles_movimientos(nodo,cadena, automata):
 def existe(cadena, lenguaje,infin):
     i = 0
     inicial = infin[0][0]
-    print(inicial)
+    
     for n in cadena:
+
         x = move(inicial, n, lenguaje)
         if len(x)==0:
             return "NO"

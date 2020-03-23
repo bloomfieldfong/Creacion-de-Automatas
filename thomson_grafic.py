@@ -161,80 +161,198 @@ def graficadora(resultado, infin):
         f.edge(str(resultado[i][0]), str(resultado[i][2]), label= str(resultado[i][1]))
 
     f.view()
+   
+   
+   
+def posbile_e(cadena, lenguaje, infin):
+    y = move([infin[0]], "e", lenguaje)
+    x = []
+    y = list(y)
+    
+    i = 0
+    while i < len(y):
+        nuevo = list(move([y[i]], "e", lenguaje))
+        x.append([y[i],"e" ,move([y[i]], "e", lenguaje)])
+        x.append([y[i],cadena ,move([y[i]], cadena, lenguaje)])
+        if len(nuevo)>0:
+            for u in range(len(nuevo)):
+                if nuevo[u] not in y:
+                    y.append(nuevo[u])
         
-def existe2(cadena, lenguaje, infin):
+        i+=1
+    
+    
+    pos = []
+    for i in range(len(y)):
+        if len(move([y[i]], cadena, lenguaje)) > 0:
+            pos.append(y[i])
+        
+        
+    ol = []
+
+    pos = set(pos)
+    x = x[::-1]
+    a = 0
+    while a < len(pos):
+        for i in range(len(x)):
+            if len(pos.intersection(x[i][2]))>0 :
+              
+                pos.add(x[i][0])     
+        a+=1
+
+    return pos
+
+
+def fin(nodo, lenguaje, infin):
+    
+    x = posibles_movimientos(nodo,"e", lenguaje)
+    i = 0
+    while i < len(x):
+        a = posibles_movimientos(x[i][2], "e", lenguaje)
+        for m in range(len(a)):
+            if a[m] not in x:
+                x.append(a[m])
+        i+=1
+        
+    l = 0
+    for i in range(len(x)):
+        if x[i][2] == infin[0][1]:
+            l+=1
+
+    if l >0:
+        return "YES"
+    else:
+        return "NO"
+    
+
+def cambio(cadena, lenguaje, infin_n):
+    
+    estados = []
+    for i in range(len(lenguaje)):
+        if lenguaje[i][0] not in estados:
+            estados.append(lenguaje[i][0])
+                
+        if lenguaje[i][2] not in estados:
+            estados.append(lenguaje[i][2])
+        
+    alfabeto =["A","B","C","D","E","F","G","H","I","J", "K", 'L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','AA','BB','CC','DD']
+    x = 0 
+    while x < len(lenguaje):
+        indice1 = estados.index(lenguaje[x][0])
+        lenguaje[x][0] = alfabeto[indice1]
+        indice1 = estados.index(lenguaje[x][2])
+        lenguaje[x][2] = alfabeto[indice1]
+        x +=1
+        
+    x = 0
+
+    #cambiamos el estado final y el inicial
+
+    infin = [0,0]
+    while x < len(infin_n[0]):
+        indice1 = estados.index(infin_n[0][x])
+        infin[x]= alfabeto[indice1]
+        x+=1
+    y = []
+    
+    x = 0
     a = 0
     inicial =[]
     inicial.append(infin[0][0])
+    x = posbile_e(cadena[0], lenguaje, infin[0])
+  
+    s = set(infin[0])
+    m = 0
+    for i in range(len(cadena)):
+        x = posbile_e(cadena[i], lenguaje, list(s))
+        m = 0
+        while m < len(x):
+            x  = list(x)
+            s = move([x[m]],cadena[i],lenguaje)
+            m+=1
+    try: 
+        if existe(cadena, lenguaje, [infin]) == "YES":
+            return "YES"
+    except:
+        print("")
 
-    for n in cadena:
-        while a<  len(inicial):
+            
+def existe2(cadena, lenguaje, infin):
+    lenguaje.append([infin[0][1]+1, "e", infin[0][1]])
+    infin= [[infin[0][1]+1, infin[0][1]]]
+    estados = []
+    for i in range(len(lenguaje)):
+        if lenguaje[i][0] not in estados:
+            estados.append(lenguaje[i][0])
+                
+        if lenguaje[i][2] not in estados:
+            estados.append(lenguaje[i][2])
+            
+    for i in estados:
+        lenguaje.append([i,"e",i])
+        
 
-            x = move({inicial[a]}, n, lenguaje)
-            y = move({inicial[a]}, "e", lenguaje)
-            
-            x = list(x)
-            y = list(y)
-            
-            if len(x)>0:
-                inicial.append(x[0])
-            if len(y)>0:
-                
-                if y[0]== infin[0][1]:
-                    return "Yes"
-                for z in range(len(y)):
-                    x.append(posibles_movimientos(y[z],n, lenguaje))
-                
-                for p in range(len(x)):
-                    if len(x[p])!=0:
-                        s = x[p][0]
-                        inicial.append(s[2])
-                   
-            
-            a+=1
-            
-    z = 0
-    print(inicial)
-    for n in range(len(inicial)):
-        if inicial[n] == infin[0][1]:
-            z +=1
+        
+    x = 0
+    a = 0
+    inicial =[]
+    inicial.append(infin[0][0])
+    x = posbile_e(cadena[0], lenguaje, infin[0])
+    s = set(infin[0])
+  
+    for i in range(len(cadena)):
+        x = posbile_e(cadena[i], lenguaje, list(s))
+        m = 0
+        while m < len(x):
+            x  = list(x)
+            s = move([x[m]],cadena[i],lenguaje)
+            m+=1
     
-    if z >0:
-        return "Yes"
+
+    if fin(list(s)[0], lenguaje, infin) == "YES" or cambio(cadena, lenguaje, infin) == "YES":
+        return 'YES'
     else:
-        return "N0"
+        return "NO"
 
-#    i = 0
-#    print(infin)
-#    inicial = infin[0][0]
-#    for n in cadena:
-#        print(n)
-#        x = move(inicial, n, lenguaje)
-#        z = move(inicial,"e",lenguaje)
-#        if len(x)==0 and move(inicial, "e",lenguaje) ==0:
-#            return "NO"
-#        x = list(x)
-#        print(z)
-#        z = list(z)
-#        if len(x)>0:
-#            inicial = x[0]
-#        else:
-#            if len(y)==1:
-#                inicial = y[0]
-#            else:
-#                print(m)
-#                for m in len(y):
-#                    y = move(m[0], n, lenguaje)
-#    i = 0 
-#    for n in range(len(infin)):
-#        if inicial == infin[n][1]:
-#            i += 1
-#    if i !=0:
-#        return "YES"
-#    else:
-#        return "NO"
+   
+    
+    
+
+#    for n in range(len(cadena)):
+#        while a<  len(inicial):
+#            print(inicial)
+#
+#            x = move({inicial[a]}, cadena[n], lenguaje)
+#            y = move({inicial[a]}, "e", lenguaje)
+#            
+#            
 #        
+#            x = list(x)
+#            y = list(y)
+#   
+#            if y[0] == infin[0][1] and len(cadena)-1 == n:
+#                return "YE"
+#            
+#            if len x == 0:
+#                a-=1
+#            if len(x)>0:
+#                inicial.append(x[0])
+#                
+#            if len(y)>0:
+#                for z in range(len(y)):
+#                    x.append(posibles_movimientos(y[z],"e", lenguaje))
+#                
+#                for p in range(len(x)):
+#                    if len(x[p])!=0:
+#                        s = x[p][0]
+#                        inicial.append(s[2])
+#            a+=1
+#            
+#    z = 0
+#    print(inicial)
+#    print(x)
 #    
-    
-    
-    
+#    if inicial[len(inicial)-1] == infin[0][1]:
+#        return "yes"
+#    else:
+#        return "no"
