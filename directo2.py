@@ -237,18 +237,35 @@ def followpos(n):
 
 def directo(tabla):
     tabla = followpos(tabla)
-
-    izq = tabla[0]
+    print(tabla)
     nodos = tabla[1]
     letras = tabla[2]
+
+    asa = []
+    izq = tabla[0]
+    if isinstance(izq[0], list):
+        for i in range(len(izq[0])):
+            asa.insert(0,izq[0][i])
+        izq.pop(1)
     
-    posi = ["a","b"]
+    for i in range(len(izq)):
+        if isinstance(izq[i],list):
+            pass
+        else:
+            asa.append(izq[i])
+            
+    print("ASA")
+    print(asa)
+    izq = asa
+    
+    
+    posi = ["a","b","c","d"]
     res  =[]
     res.append(izq[0])
     movi = []
     i = 0
     while i< len(res):
-       
+        print(res)
         listas  = []
         letritas = []
         for x in range(len(res[i])): #{0,1,4}
@@ -260,24 +277,33 @@ def directo(tabla):
 
         a = []
         b = []
+        c = []
         for e in range(len(letritas)):
             if letritas[e] == "a":
                 a.append(list(listas[e]))
             if letritas[e] == "b":
                 b.append(list(listas[e]))
-                    
+            if letritas[e] == "c":
+                c.append(list(listas[e]))
+                        
         a = set().union(*a)
         b = set().union(*b)
+        c = set().union(*c)
         if len(a) != 0:
             movi.append([res[i], "a", a])
             
         if len(b) != 0:
             movi.append([res[i], "b", b])
+        if len(c) != 0:
+            movi.append([res[i], "c", c])
+        
         
         if a not in res and len(a) != 0:
             res.append(a)
         if b not in res and len(b) != 0:
             res.append(b)
+        if c not in res and len(c) != 0:
+            res.append(c)
         i+=1
         
     alfabeto =["A","B","C","D","E","F","G","H","I","J"]
